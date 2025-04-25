@@ -36,6 +36,6 @@ class Player(models.Model):
     nickname = CharField(max_length=255, unique=True)
     email = EmailField(max_length=255)
     bio = CharField(max_length=255)
-    race = ForeignKey(Race, on_delete=CASCADE, related_name="races")
+    race = ForeignKey(Race, on_delete=CASCADE, related_name="players")
     guild = ForeignKey(Guild, on_delete=SET_NULL, null=True)
     created_at = DateTimeField(auto_now_add=True)
