@@ -18,7 +18,7 @@ class Race(models.Model):
 class Skill(models.Model):
     name = CharField(max_length=255, unique=True)
     bonus = CharField(max_length=255)
-    race = ForeignKey(Race, on_delete=CASCADE, related_name="skill_races")
+    race = ForeignKey(Race, on_delete=CASCADE, related_name="skills")
 
     def __repr__(self) -> str:
         return f"{self.name}, bonus: {self.bonus}, race: {self.race}"
@@ -36,6 +36,6 @@ class Player(models.Model):
     nickname = CharField(max_length=255, unique=True)
     email = EmailField(max_length=255)
     bio = CharField(max_length=255)
-    race = ForeignKey(Race, on_delete=CASCADE, related_name="player_races")
+    race = ForeignKey(Race, on_delete=CASCADE, related_name="races")
     guild = ForeignKey(Guild, on_delete=SET_NULL, null=True)
     created_at = DateTimeField(auto_now_add=True)

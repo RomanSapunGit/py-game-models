@@ -5,6 +5,7 @@ import json
 
 
 def main() -> None:
+
     with open("players.json", "rb") as json_file:
         objects = json.load(json_file)
         for key in objects:
@@ -16,15 +17,18 @@ def main() -> None:
 
             race = Race.objects.get_or_create(**objects[key].pop("race"))[0]
 
-            [Skill.objects.get_or_create(
-                **skill,
-                race=race
-            ) for skill in skills_list]
+            for skill in skills_list:
+                Skill.objects.get_or_create(
+                    **skill,
+                    race=race
+                )
+
             Player.objects.get_or_create(
                 nickname=key,
                 **objects[key],
                 race=race,
-                guild=guild)
+                guild=guild
+            )
 
 
 if __name__ == "__main__":
